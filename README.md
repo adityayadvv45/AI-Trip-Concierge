@@ -1,66 +1,105 @@
 # 🌴 AI Trip Concierge — Hotel Travel Companion
-  
-> Post-booking travel companion for hotel guests in India.
+
+> A post-booking AI travel companion designed to help hotel guests plan, explore, and navigate their trip.
+
+## 🌐 Live Demo
+
+**[Launch AI Trip Concierge →](https://ai-trip-concierge-beta.vercel.app/)**
+
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge\&logo=github)](https://github.com/adityayadvv45/AI-Trip-Concierge)
 
 ---
 
-## 🌟 Problem Statement & Solution
+## 📌 Overview
 
-**Problem**: Booking platforms abruptly end their relationship with the guest at checkout — there is no continuity into the actual trip, which is where hotel loyalty and on-ground hospitality experiences thrive.
+Most travel platforms focus heavily on the booking experience and provide limited assistance once the reservation is complete.
 
-**Solution**: **AI Trip Concierge** is an intelligent, post-booking companion tailored for hotel guests. It remembers trip context, generates customized multi-day itineraries, recommends verified local dining & cultural spots grounded in a local knowledge base (no hallucinations), provides local transport navigation, and sends proactive contextual alerts (weather, check-in, sunset golden hours).
+**AI Trip Concierge** extends the guest experience beyond booking by acting as a digital travel companion. It uses the guest's booking context, a curated local knowledge base, AI tool-calling, itinerary generation, and proactive alerts to provide personalized assistance throughout the trip.
+
+The current prototype is designed around a hotel stay in **Goa, India**, with curated information about restaurants, activities, transportation, places, weather, and local experiences.
 
 ---
 
-## 🚀 Key Features
+## ✨ Key Features
 
-1. **Personalized Guest Dashboard**:
-   - Dynamic booking overview for hotel guests at **Taj Fort Aguada Resort & Spa, Goa (Sinquerim, Candolim)** (Confirmation: `TAJ-GOA-89421`) with customizable guest name onboarding.
-   - Real-time coastal weather conditions (temperature, humidity, high tide timing, sunset countdown).
-   - 1-click quick concierge launcher chips.
+### 🏨 Personalized Guest Dashboard
 
-2. **Smart Day-by-Day Itinerary Engine**:
-   - Customizable duration (1 to 5 days, default 3 days) with celebratory confetti.
-   - Realistic morning, afternoon, and evening timelines with travel distances calculated from Candolim.
-   - Authentic Goan locations (Aguada Fort, Pousada by the Beach, Gunpowder Assagao, Fontainhas Latin Quarter, Basilica of Bom Jesus, Mandovi Sunset Cruise, Thalassa Siolim).
+* Displays hotel booking and trip information.
+* Supports guest-name onboarding and personalization.
+* Shows coastal weather information including temperature, humidity, high tide timing, and sunset.
+* Provides quick-access concierge actions.
 
-3. **Conversational AI Concierge (Tool-Calling Engine)**:
-   - Powered by official **Anthropic Claude Python SDK** (`claude-3-5-sonnet`) with native tool-calling:
-     - `search_restaurants`
-     - `search_activities`
-     - `get_transport_tips`
-     - `get_place_details`
-     - `get_weather_and_tide_info`
-   - Built-in intelligent local semantic tool-calling fallback engine for 100% fail-safe offline and keyless demo presentation.
-   - Real-time tool execution badges, rich interactive recommendation cards with signature dishes, price range, and distance indicators.
+### 🗓️ Smart Itinerary Generator
 
-4. **Proactive Smart Alerts Hub**:
-   - Real-time simulation of critical travel alerts:
-     - 🌧️ *Evening Rain Advisory (Baga & Calangute after 6 PM)* with indoor dining switch recommendations.
-     - 🔑 *Taj Digital Room Key & Welcome Refreshment Pass*.
-     - 🌅 *Golden Hour Countdown (Chapora Fort & Thalassa)*.
-     - 🌊 *High Tide Advisory (Vagator Rocks)*.
-   - Interactive toast notification and auto-injection into the live AI concierge chat feed.
+* Generates customizable **1–5 day itineraries**.
+* Creates morning, afternoon, and evening activities.
+* Uses hotel/area context when planning activities.
+* Includes travel distance and timing information.
+* Covers curated Goa destinations and experiences such as:
 
-5. **Local Transport & Mobility Guide**:
-   - Clear advice on Goa's unique mobility landscape: official **GoaMiles App Cab** meter rates, scooter rentals, motorcycle pilots (bike taxis), and Mandovi river ferries.
+  * Aguada Fort
+  * Fontainhas Latin Quarter
+  * Basilica of Bom Jesus
+  * Mandovi Sunset Cruise
+  * Thalassa Siolim
+  * Pousada by the Beach
+  * Gunpowder Assagao
+
+### 🤖 Conversational AI Concierge
+
+The application provides a conversational interface for hotel guests to ask questions and receive local recommendations.
+
+The backend supports tool-based interactions for:
+
+* `search_restaurants`
+* `search_activities`
+* `get_transport_tips`
+* `get_place_details`
+* `get_weather_and_tide_info`
+
+Recommendations are grounded in a curated local knowledge base rather than relying entirely on open-ended model generation.
+
+The application also includes a fallback mechanism for demonstration and offline scenarios when the external AI service is unavailable.
+
+### 🔔 Proactive Travel Alerts
+
+The alert system can simulate contextual notifications such as:
+
+* 🌧️ Evening rain advisories
+* 🔑 Hotel check-in and room-key reminders
+* 🌅 Golden-hour recommendations
+* 🌊 High-tide advisories
+
+Alerts can also be surfaced directly inside the concierge experience.
+
+### 🛵 Local Transport Guide
+
+Provides practical information about transportation options in Goa, including:
+
+* GoaMiles
+* Scooter rentals
+* Motorcycle pilots / bike taxis
+* Mandovi river ferries
 
 ---
 
 ## 🏗️ Architecture
 
-```
-ai-trip-concierge/
+```text
+AI-Trip-Concierge/
+│
 ├── backend/
 │   ├── app/
 │   │   ├── __init__.py
-│   │   ├── main.py          # FastAPI server & endpoints
-│   │   ├── agent.py         # Claude 3.5 Sonnet Tool Use & Fallback Agent
-│   │   ├── tools.py         # Search & filter tools for knowledge base
-│   │   ├── itinerary.py     # Multi-day itinerary generator
-│   │   └── alerts.py        # Proactive alerts simulator
+│   │   ├── main.py
+│   │   ├── agent.py
+│   │   ├── tools.py
+│   │   ├── itinerary.py
+│   │   └── alerts.py
+│   │
 │   └── data/
-│       └── goa.json         # Curated Goa Knowledge Base (22+ places, transport)
+│       └── goa.json
+│
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
@@ -71,64 +110,233 @@ ai-trip-concierge/
 │   │   │   ├── RecommendationsView.tsx
 │   │   │   ├── AlertsHub.tsx
 │   │   │   └── TransportModal.tsx
+│   │   │
 │   │   ├── services/
-│   │   │   └── api.ts       # Backend REST API client
-│   │   ├── types.ts         # TypeScript definitions
-│   │   ├── App.tsx          # Main application shell
+│   │   │   └── api.ts
+│   │   │
+│   │   ├── types.ts
+│   │   ├── App.tsx
 │   │   ├── main.tsx
-│   │   └── index.css        # Premium Goa aesthetic design tokens
+│   │   └── index.css
+│   │
 │   ├── index.html
 │   ├── package.json
 │   └── vite.config.ts
-├── demo_script.md           # 2-Minute Live Pitch & Demo Script
+│
+├── demo_script.md
 ├── requirements.txt
 ├── .env.example
 └── README.md
 ```
 
+### Request Flow
+
+```text
+Guest
+  │
+  ▼
+React + TypeScript Frontend
+  │
+  │ REST API
+  ▼
+FastAPI Backend
+  │
+  ├── AI Agent / Tool Calling
+  │
+  ├── Itinerary Engine
+  │
+  ├── Alert Engine
+  │
+  └── Local Knowledge Base
+          │
+          ▼
+      Goa Dataset
+```
+
 ---
 
-## 🛠️ Quick Start & Setup
+## 🛠️ Tech Stack
 
-### 1. Prerequisites
-- Python 3.10+
-- Node.js 18+ and npm
+### Frontend
+
+* React
+* TypeScript
+* Vite
+* CSS
+
+### Backend
+
+* Python
+* FastAPI
+* REST APIs
+
+### AI
+
+* Anthropic Claude API
+* Tool Calling
+* Local knowledge-base retrieval
+* Fallback recommendation engine
+
+### Data
+
+* Curated Goa travel dataset
+* Structured JSON knowledge base
+
+### Deployment
+
+* Vercel
+* FastAPI backend
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Make sure you have:
+
+* Python 3.10+
+* Node.js 18+
+* npm
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/adityayadvv45/AI-Trip-Concierge.git
+cd AI-Trip-Concierge
+```
 
 ### 2. Backend Setup
+
+From the project root:
+
 ```bash
-# Navigate to project root
-cd AI-Trip-Concierge
-
-# (Optional) Set your Anthropic API Key in .env
-copy .env.example .env
-
-# Install Python dependencies
 pip install -r requirements.txt
+```
 
-# Start FastAPI server (Port 8000)
+Create your environment file:
+
+```bash
+copy .env.example .env
+```
+
+Add the required API configuration to `.env`.
+
+Start the FastAPI server:
+
+```bash
 python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
+Backend:
+
+```text
+http://127.0.0.1:8000
+```
+
 ### 3. Frontend Setup
+
+Open another terminal:
+
 ```bash
-# In a new terminal, navigate to frontend
 cd frontend
-
-# Install dependencies
 npm install
-
-# Start Vite development server (Port 5173)
 npm run dev
 ```
 
-Open your browser at `http://127.0.0.1:5173/`.
+Frontend:
+
+```text
+http://127.0.0.1:5173
+```
 
 ---
 
-## 🎯 Verification & Demo Testing
+## 🧪 Demo Flow
 
-1. **Dashboard**: Loads Taj Fort Aguada booking details, guest profile, and live weather.
-2. **Itinerary**: Click *"Generate My 3-Day Itinerary"* to see Day 1, 2, and 3 morning/afternoon/evening plans.
-3. **AI Chat**: Click *"🍽️ Dinner Near Me Tonight"* or send *"What's a good place for dinner near me tonight?"* to verify tool-calling traces and rich recommendation cards.
-4. **Proactive Alert**: Click *"⚡ Simulate Alert"* in the top navbar to trigger the 6 PM Baga rain warning toast and chat alert.
-5. **Transport Guide**: Click *"Transport Guide"* in navbar for Goa scooter, GoaMiles, and pilot bike taxi guidance.
+### 1. Dashboard
+
+Open the application and review the hotel booking context, guest information, and weather details.
+
+### 2. Generate an Itinerary
+
+Select the desired trip duration and generate a personalized multi-day itinerary.
+
+### 3. Try the AI Concierge
+
+Example prompts:
+
+```text
+What's a good place for dinner tonight?
+
+What should I visit tomorrow?
+
+How can I get around Goa?
+
+What can I do near Candolim?
+
+What's the weather like this evening?
+```
+
+The concierge uses the available tools and local knowledge base to generate recommendations.
+
+### 4. Test Proactive Alerts
+
+Use the alert controls to simulate travel-related notifications and observe how they are surfaced in the concierge experience.
+
+### 5. Explore Transport
+
+Open the Transport Guide to view available transportation options and practical travel guidance.
+
+---
+
+## 🔌 Core Backend Modules
+
+| Module         | Responsibility                        |
+| -------------- | ------------------------------------- |
+| `main.py`      | FastAPI application and API endpoints |
+| `agent.py`     | AI agent and tool-calling workflow    |
+| `tools.py`     | Local search and recommendation tools |
+| `itinerary.py` | Multi-day itinerary generation        |
+| `alerts.py`    | Proactive travel-alert simulation     |
+| `goa.json`     | Curated local travel knowledge base   |
+
+---
+
+## 🎯 Project Goals
+
+The project demonstrates how an AI-powered post-booking experience can:
+
+* Maintain continuity after hotel booking.
+* Personalize recommendations using trip context.
+* Combine LLM reasoning with structured local data.
+* Use tool-calling for grounded recommendations.
+* Generate useful itineraries instead of generic suggestions.
+* Proactively surface relevant information during a trip.
+
+---
+
+## 🔮 Future Improvements
+
+* Integrate real hotel booking APIs.
+* Add live maps and navigation.
+* Connect to real-time restaurant and activity availability.
+* Add user authentication and persistent guest profiles.
+* Replace simulated alerts with scheduled background jobs.
+* Add multilingual concierge support.
+* Extend the knowledge base beyond Goa.
+* Add real-time flight and transportation information.
+
+---
+
+## 👨‍💻 Author
+
+**Aditya Yadav**
+** Abhinav Sahu **
+**Aditya Prajapati**
+
+--- 
+
+## 📄 License
+
+This project is developed for educational, portfolio, and demonstration purposes.
